@@ -3,8 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/drawable/button_minus_background.xml" value="0.22592592592592592" />
+        <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/drawable/button_plus_background.xml" value="0.22592592592592592" />
+        <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/drawable/buttons_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/drawable/fact_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/drawable/ic_baseline_keyboard_arrow_up_24.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/layout/fragment_main_page.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/layout/test.xml" value="0.25" />
+        <entry key="..\:/Users/kmd02/AndroidStudioProjects/Numbers/app/src/main/res/layout/text.xml" value="0.25" />
       </map>
     </option>
   </component>
