@@ -25,6 +25,7 @@ class MainPageViewModel: ViewModel(), MainViewModelContract {
             number
         )
         _liveData.value = newState
+        //комментарий для тестового коммита
     }
 
     fun increaseDigit(){
