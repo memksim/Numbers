@@ -3,7 +3,10 @@ package com.memksim.numbers.ui.views
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -32,7 +35,7 @@ class MainPageFragment: Fragment(R.layout.fragment_main_page) {
         viewModel.liveData.observe(viewLifecycleOwner, Observer {
             //val text = it?.text ?: "error"
             binding.factText.text = it.fact
-            binding.numberTextView.setText(it.digit.toString())
+            binding.numberText.setText(it.digit.toString())
         })
 
         binding.plus.setOnClickListener {
@@ -51,10 +54,19 @@ class MainPageFragment: Fragment(R.layout.fragment_main_page) {
             getRandomFact()
         }
 
-        binding.numberTextView.doAfterTextChanged {
-            //val digit = it.toString()
-            //viewModel.updateDigit(0)
-        }
+        binding.numberText.setOnEditorActionListener(object: TextView.OnEditorActionListener{
+            override fun onEditorAction(p0: TextView?, p1: Int, p2: KeyEvent?): Boolean {
+                if(p1 == EditorInfo.IME_ACTION_DONE){
+                    if(binding.numberText.text.toString() != ""){
+                        viewModel.updateDigit(binding.numberText.text.toString().toInt())
+                        viewModel.getSpecificFact(viewModel.liveData.value!!.digit)
+                        return true
+                    }
+
+                }
+                return false
+            }
+        })
 
     }
 
