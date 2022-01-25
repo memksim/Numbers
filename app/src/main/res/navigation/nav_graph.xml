@@ -15,6 +15,12 @@
         <action
             android:id="@+id/action_mainPageFragment_to_triviaFactPageFragment"
             app:destination="@id/triviaFactPageFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_mathFactPageFragment"
+            app:destination="@id/mathFactPageFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_dateFactPageFragment"
+            app:destination="@id/dateFactPageFragment" />
     </fragment>
 
     <fragment
@@ -24,6 +30,24 @@
         tools:layout="@layout/fragment_trivia_fact">
         <action
             android:id="@+id/action_triviaFactPageFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dateFactPageFragment"
+        android:name="com.memksim.numbers.ui.views.DateFactPageFragment"
+        android:label="DateFactPageFragment"
+        tools:layout="@layout/fragment_date_fact">
+        <action
+            android:id="@+id/action_dateFactPageFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mathFactPageFragment"
+        android:name="com.memksim.numbers.ui.views.MathFactPageFragment"
+        android:label="MathFactPageFragment"
+        tools:layout="@layout/fragment_math_fact">
+        <action
+            android:id="@+id/action_mathFactPageFragment_to_mainPageFragment"
             app:destination="@id/mainPageFragment" />
     </fragment>
 </navigation>

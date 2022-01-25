@@ -25,10 +25,26 @@ class MainPageFragment: Fragment(R.layout.fragment_main_page) {
         binding.triviaFactButton.setOnClickListener {
             goToTrivia()
         }
+
+        binding.mathFactButton.setOnClickListener {
+            goToMath()
+        }
+
+        binding.dateFactButton.setOnClickListener {
+            goToDate()
+        }
     }
 
     fun goToTrivia(){
         navController.navigate(R.id.action_mainPageFragment_to_triviaFactPageFragment)
+    }
+
+    fun goToMath(){
+        navController.navigate(R.id.action_mainPageFragment_to_mathFactPageFragment)
+    }
+
+    fun goToDate(){
+        navController.navigate(R.id.action_mainPageFragment_to_dateFactPageFragment)
     }
 
     override fun onDestroyView() {

@@ -13,4 +13,10 @@ interface NumbersApi {
 
     @GET( "{number}/trivia?json")
     fun getTriviaFactAboutSpecificNumber(@Path("number" ) number: Int): Call<Fact>
+
+    @GET("random/math?json")
+    fun getMathFactAboutRandomNumber(): Call<Fact>
+
+    @GET("{number}/math?json")
+    fun getMathFactAboutSpecificNumber(@Path("number") number: Int): Call<Fact>
 }

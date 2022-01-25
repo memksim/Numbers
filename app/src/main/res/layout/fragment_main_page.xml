@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="@id/triviaFactButton"/>
 
     <Button
-        android:id="@+id/DateFactButton"
+        android:id="@+id/dateFactButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
