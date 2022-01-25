@@ -5,15 +5,14 @@ import com.memksim.numbers.TAG
 import com.memksim.numbers.model.Fact
 import com.memksim.numbers.model.datasources.network.NumbersApi
 import com.memksim.numbers.model.datasources.network.NumbersClient
-import com.memksim.numbers.ui.stateholders.MainViewModelContract
+import com.memksim.numbers.ui.stateholders.TriviaFactViewModelContract
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.create
 
 class NumbersRepository {
 
-    fun getTriviaFactAboutRandomNumber(callback: MainViewModelContract){
+    fun getTriviaFactAboutRandomNumber(callback: TriviaFactViewModelContract){
         var fact: Fact?
         val api = NumbersClient.getClient().create(NumbersApi::class.java)
 
@@ -40,7 +39,7 @@ class NumbersRepository {
         })
     }
 
-    fun getTriviaFactAboutSpecificNumber(number: Int, callback: MainViewModelContract){
+    fun getTriviaFactAboutSpecificNumber(number: Int, callback: TriviaFactViewModelContract){
         var fact: Fact?
         val api = NumbersClient.getClient().create(NumbersApi::class.java)
 

@@ -5,23 +5,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.memksim.numbers.model.Fact
 import com.memksim.numbers.model.repositories.NumbersRepository
-import com.memksim.numbers.ui.state.MainPageState
+import com.memksim.numbers.ui.state.TriviaFactPageState
 import kotlin.random.Random
 
-class MainPageViewModel: ViewModel(), MainViewModelContract {
+class TriviaFactPageViewModel: ViewModel(), TriviaFactViewModelContract {
 
     val repository: NumbersRepository = NumbersRepository()
 
-    private val _liveData: MutableLiveData<MainPageState> by lazy{
-        MutableLiveData<MainPageState>(
-            MainPageState(Random.nextInt(0, 100)
+    private val _liveData: MutableLiveData<TriviaFactPageState> by lazy{
+        MutableLiveData<TriviaFactPageState>(
+            TriviaFactPageState(Random.nextInt(0, 100)
             )
         )
     }
-    var liveData: LiveData<MainPageState> = _liveData
+    var liveData: LiveData<TriviaFactPageState> = _liveData
 
     fun updateDigit(number: Int){
-        val newState = MainPageState(
+        val newState = TriviaFactPageState(
             number
         )
         _liveData.value = newState
@@ -31,7 +31,7 @@ class MainPageViewModel: ViewModel(), MainViewModelContract {
     fun increaseDigit(){
         val digit = _liveData.value!!.digit
 
-        val newState = MainPageState(
+        val newState = TriviaFactPageState(
             digit + 1,
             _liveData.value!!.fact
         )
@@ -41,7 +41,7 @@ class MainPageViewModel: ViewModel(), MainViewModelContract {
 
     fun decreaseDigit(){
         val digit = _liveData.value!!.digit
-        val newState = MainPageState(
+        val newState = TriviaFactPageState(
             digit - 1,
             _liveData.value!!.fact
         )
@@ -60,7 +60,7 @@ class MainPageViewModel: ViewModel(), MainViewModelContract {
 
 
     override fun notifyDataChanged(data: Fact) {
-        val newState = MainPageState(
+        val newState = TriviaFactPageState(
             data.number.toInt(),
             data.text
         )

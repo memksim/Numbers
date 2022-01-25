@@ -2,22 +2,26 @@ package com.memksim.numbers
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.memksim.numbers.ui.views.MainPageFragment
+import com.memksim.numbers.ui.views.TriviaFactPageFragment
 import com.memksim.numbers.databinding.ActivityMainBinding
+import com.memksim.numbers.ui.views.MainPageFragment
 
-/**http://numbersapi.com/#random/trivia*/
+/**http://numbersapi.com*/
 
 const val TAG = "test"
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //при повороте экрана гарантируем, что не добавим повторно фракмент который уже был добавлен
-        if(savedInstanceState == null){
+        /*if(savedInstanceState == null){
             supportFragmentManager.beginTransaction().add(R.id.container, MainPageFragment()).commit()
-        }
+        }*/
 
 
     }
