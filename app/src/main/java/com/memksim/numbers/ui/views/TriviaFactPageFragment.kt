@@ -80,17 +80,17 @@ class TriviaFactPageFragment: Fragment(R.layout.fragment_trivia_fact) {
 
     }
 
-    fun getRandomFact(){
+    private fun getRandomFact(){
         viewModel.getRandomFact(0)
     }
 
-    fun getSpecificFact(){
+    private fun getSpecificFact(){
         viewModel.getSpecificFact(
             requestCode = 0,
             number = viewModel.liveData.value!!.digit)
     }
 
-    fun goBack(){
+    private fun goBack(){
         navController.navigate(R.id.action_triviaFactPageFragment_to_mainPageFragment)
     }
 

@@ -19,4 +19,10 @@ interface NumbersApi {
 
     @GET("{number}/math?json")
     fun getMathFactAboutSpecificNumber(@Path("number") number: Int): Call<Fact>
+
+    @GET("random/date?json")
+    fun getDateFactAboutRandomDate(): Call<Fact>
+
+    @GET("{month}/{day}/date?json")
+    fun getDateFactAboutSpecificDate(@Path("month") month: Int, @Path("day") day: Int): Call<Fact>
 }

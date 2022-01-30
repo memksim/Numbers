@@ -6,4 +6,10 @@ interface DataChangedCallback {
 
     fun notifyDataChanged(data: Fact)
 
+    fun notifyDataChanged(
+        fact: String,
+        day: Int,
+        month: Int
+    )
+
 }

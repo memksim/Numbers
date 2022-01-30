@@ -82,17 +82,17 @@ class MathFactPageFragment: Fragment(R.layout.fragment_math_fact) {
 
     }
 
-    fun getRandomFact(){
+    private fun getRandomFact(){
         viewModel.getRandomFact(1)
     }
 
-    fun getSpecificFact(){
+    private fun getSpecificFact(){
         viewModel.getSpecificFact(
             requestCode = 1,
             viewModel.liveData.value!!.digit)
     }
 
-    fun goBack(){
+    private fun goBack(){
         navController.navigate(R.id.action_mathFactPageFragment_to_mainPageFragment)
     }
 

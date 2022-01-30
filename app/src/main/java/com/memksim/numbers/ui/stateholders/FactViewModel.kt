@@ -15,7 +15,9 @@ class FactViewModel: ViewModel(), DataChangedCallback {
     private val _liveData: MutableLiveData<FactPageState> by lazy{
         MutableLiveData<FactPageState>(
             FactPageState(
-                digit = Random.nextInt(0, 100)
+                digit = Random.nextInt(0, 100),
+                month = Random.nextInt(1, 12),
+                day = Random.nextInt(1, 28)
             )
         )
     }
@@ -26,7 +28,17 @@ class FactViewModel: ViewModel(), DataChangedCallback {
             digit = number
         )
         _liveData.value = newState
-        //комментарий для тестового коммита
+    }
+
+    fun updateDate(
+        month: Int = _liveData.value!!.month,
+        day: Int = _liveData.value!!.day
+    ){
+        val newState = FactPageState(
+            month = month,
+            day = day
+        )
+        _liveData.value = newState
     }
 
     fun increaseDigit(){
@@ -40,6 +52,119 @@ class FactViewModel: ViewModel(), DataChangedCallback {
         repository.getTriviaFactAboutSpecificNumber(digit+1, this)
     }
 
+    fun increaseDay(){
+        var day = _liveData.value!!.day
+        var month = _liveData.value!!.month
+
+        when(month){
+            1 ->{
+                if(day == 31){
+                    month++
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+            2 ->{
+                if(day == 29){
+                    month++
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+            3 ->{
+                if(day == 31){
+                    month++
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+            4 ->{
+                if(day == 30){
+                    month++
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+            5 ->{
+                if(day == 31){
+                    month++
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+            6 ->{
+                if(day == 30){
+                    month++
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+            7 ->{
+                if(day == 31){
+                    month++
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+            8 ->{
+                if(day == 31){
+                    month++
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+            9 ->{
+                if(day == 30){
+                    month++
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+            10 ->{
+                if(day == 31){
+                    month++
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+            11 ->{
+                if(day == 30){
+                    month++
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+            12 ->{
+                if(day == 31){
+                    month = 1
+                    day = 1
+                }else{
+                    day++
+                }
+            }
+
+        }
+
+        val newState = FactPageState(
+            day = day,
+            month = month
+        )
+
+        _liveData.value = newState
+        getSpecificFact(2)
+    }
+
     fun decreaseDigit(){
         val digit = _liveData.value!!.digit
         val newState = FactPageState(
@@ -48,6 +173,119 @@ class FactViewModel: ViewModel(), DataChangedCallback {
         )
         _liveData.value = newState
         repository.getTriviaFactAboutSpecificNumber(digit-1, this)
+    }
+
+    fun decreaseDay(){
+        var day = _liveData.value!!.day
+        var month = _liveData.value!!.month
+
+        when(month){
+            1 ->{
+                if(day == 1){
+                    month = 12
+                    day = 31
+                }else{
+                    day--
+                }
+            }
+            2 ->{
+                if(day == 1){
+                    month--
+                    day = 31
+                }else{
+                    day--
+                }
+            }
+            3 ->{
+                if(day == 1){
+                    month--
+                    day = 29
+                }else{
+                    day--
+                }
+            }
+            4 ->{
+                if(day == 1){
+                    month--
+                    day = 31
+                }else{
+                    day--
+                }
+            }
+            5 ->{
+                if(day == 1){
+                    month--
+                    day = 30
+                }else{
+                    day--
+                }
+            }
+            6 ->{
+                if(day == 1){
+                    month--
+                    day = 31
+                }else{
+                    day--
+                }
+            }
+            7 ->{
+                if(day == 1){
+                    month--
+                    day = 30
+                }else{
+                    day--
+                }
+            }
+            8 ->{
+                if(day == 1){
+                    month--
+                    day = 31
+                }else{
+                    day--
+                }
+            }
+            9 ->{
+                if(day == 1){
+                    month--
+                    day = 31
+                }else{
+                    day--
+                }
+            }
+            10 ->{
+                if(day == 1){
+                    month--
+                    day = 30
+                }else{
+                    day--
+                }
+            }
+            11 ->{
+                if(day == 1){
+                    month--
+                    day = 31
+                }else{
+                    day--
+                }
+            }
+            12 ->{
+                if(day == 1){
+                    month--
+                    day = 30
+                }else{
+                    day--
+                }
+            }
+
+        }
+
+        val newState = FactPageState(
+            day = day,
+            month = month
+        )
+
+        _liveData.value = newState
+        getSpecificFact(2)
     }
 
     /*0 - random fact
@@ -64,7 +302,7 @@ class FactViewModel: ViewModel(), DataChangedCallback {
                 repository.getMathFactAboutRandomNumber(this)
             }
             2 ->{
-                //TODO
+                repository.getDateFactAboutRandomDate(this)
             }
         }
 
@@ -84,7 +322,7 @@ class FactViewModel: ViewModel(), DataChangedCallback {
                 repository.getMathFactAboutSpecificNumber(number, this)
             }
             2 ->{
-                //TODO
+                repository.getDateFactAboutSpecificDate(this, month, day)
             }
         }
 
@@ -96,6 +334,15 @@ class FactViewModel: ViewModel(), DataChangedCallback {
         val newState = FactPageState(
             digit = data.number.toInt(),
             fact = data.text,
+        )
+        _liveData.value = newState
+    }
+
+    override fun notifyDataChanged(fact: String, day: Int, month: Int) {
+        val newState = FactPageState(
+            fact = fact,
+            day = day,
+            month = month
         )
         _liveData.value = newState
     }
