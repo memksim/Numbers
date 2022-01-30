@@ -12,14 +12,14 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.memksim.numbers.R
 import com.memksim.numbers.databinding.FragmentTriviaFactBinding
-import com.memksim.numbers.ui.stateholders.TriviaFactPageViewModel
+import com.memksim.numbers.ui.stateholders.FactViewModel
 
 class TriviaFactPageFragment: Fragment(R.layout.fragment_trivia_fact) {
 
     private var _binding: FragmentTriviaFactBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: TriviaFactPageViewModel
+    private lateinit var viewModel: FactViewModel
 
     private lateinit var navController: NavController
 
@@ -29,8 +29,11 @@ class TriviaFactPageFragment: Fragment(R.layout.fragment_trivia_fact) {
 
         navController = findNavController()
 
-        viewModel = ViewModelProvider(this)[TriviaFactPageViewModel::class.java]
-        viewModel.getSpecificFact(viewModel.liveData.value!!.digit)
+        viewModel = ViewModelProvider(this)[FactViewModel::class.java]
+        viewModel.getSpecificFact(
+            requestCode = 0,
+            number = viewModel.liveData.value!!.digit
+        )
 
         viewModel.liveData.observe(viewLifecycleOwner, Observer {
             //val text = it?.text ?: "error"
@@ -63,7 +66,10 @@ class TriviaFactPageFragment: Fragment(R.layout.fragment_trivia_fact) {
                 if(p1 == EditorInfo.IME_ACTION_DONE){
                     if(binding.numberText.text.toString() != ""){
                         viewModel.updateDigit(binding.numberText.text.toString().toInt())
-                        viewModel.getSpecificFact(viewModel.liveData.value!!.digit)
+                        viewModel.getSpecificFact(
+                            requestCode = 0,
+                            number = viewModel.liveData.value!!.digit
+                        )
                         return true
                     }
 
@@ -75,11 +81,13 @@ class TriviaFactPageFragment: Fragment(R.layout.fragment_trivia_fact) {
     }
 
     fun getRandomFact(){
-        viewModel.getRandomFact()
+        viewModel.getRandomFact(0)
     }
 
     fun getSpecificFact(){
-        viewModel.getSpecificFact(viewModel.liveData.value!!.digit)
+        viewModel.getSpecificFact(
+            requestCode = 0,
+            number = viewModel.liveData.value!!.digit)
     }
 
     fun goBack(){
