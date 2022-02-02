@@ -6,18 +6,40 @@ import com.memksim.numbers.model.Fact
 import com.memksim.numbers.model.datasources.network.NumbersApi
 import com.memksim.numbers.model.datasources.network.NumbersClient
 import com.memksim.numbers.ui.stateholders.DataChangedCallback
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class NumbersRepository {
 
-    fun getTriviaFactAboutRandomNumber(callback: DataChangedCallback){
-        var fact: Fact?
+    private val disposableBag = CompositeDisposable()
+
+    fun clearBag(){
+        disposableBag.dispose()
+        Log.d(TAG, "clearBag: cleared - ${disposableBag.size()}")
+    }
+
+    fun getTriviaFactAboutRandomNumber(callback: DataChangedCallback) {
         val api = NumbersClient.getClient().create(NumbersApi::class.java)
 
-        val data = api.getTriviaFactAboutRandomNumber()
-        data.enqueue(object : Callback<Fact>{
+        disposableBag.add(api.getTriviaFactAboutRandomNumber()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                callback.notifyDataChanged(it)
+            },{
+                callback.notifyDataChanged(
+                    Fact(
+                        it.toString(),
+                        false,
+                        (-1.0).toFloat()
+                    )
+                )
+            })
+        )
+
+
+        /*data.enqueue(object : Callback<Fact>{
 
             override fun onResponse(call: Call<Fact>, response: Response<Fact>) {
                 fact = response.body()
@@ -36,115 +58,87 @@ class NumbersRepository {
                 Log.d(TAG, "onFailure: $t")
             }
 
-        })
+        })*/
     }
 
     fun getTriviaFactAboutSpecificNumber(number: Int, callback: DataChangedCallback){
-        var fact: Fact?
         val api = NumbersClient.getClient().create(NumbersApi::class.java)
 
-        val data = api.getTriviaFactAboutSpecificNumber(number = number)
-        data.enqueue(object : Callback<Fact>{
-
-            override fun onResponse(call: Call<Fact>, response: Response<Fact>) {
-                fact = response.body()
-                callback.notifyDataChanged(fact!!)
-                Log.d(TAG, "onResponse: ${fact!!}")
-            }
-
-            override fun onFailure(call: Call<Fact>, t: Throwable) {
+        disposableBag.add(api.getTriviaFactAboutSpecificNumber(number)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                callback.notifyDataChanged(it)
+            },{
                 callback.notifyDataChanged(
                     Fact(
-                        t.toString(),
+                        it.toString(),
                         false,
                         (-1.0).toFloat()
                     )
                 )
-                Log.d(TAG, "onFailure: $t")
-            }
-        })
+            })
+        )
     }
 
     fun getMathFactAboutRandomNumber(callback: DataChangedCallback){
-        var fact: Fact?
         val api = NumbersClient.getClient().create(NumbersApi::class.java)
 
-        val data = api.getMathFactAboutRandomNumber()
-        data.enqueue(object : Callback<Fact>{
-
-            override fun onResponse(call: Call<Fact>, response: Response<Fact>) {
-                fact = response.body()
-                callback.notifyDataChanged(fact!!)
-                Log.d(TAG, "onResponse: ${fact!!}")
-            }
-
-            override fun onFailure(call: Call<Fact>, t: Throwable) {
+        disposableBag.add(api.getMathFactAboutRandomNumber()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                callback.notifyDataChanged(it)
+            },{
                 callback.notifyDataChanged(
                     Fact(
-                        t.toString(),
+                        it.toString(),
                         false,
                         (-1.0).toFloat()
                     )
                 )
-                Log.d(TAG, "onFailure: $t")
-            }
-
-        })
+            })
+        )
     }
 
     fun getMathFactAboutSpecificNumber(number: Int, callback: DataChangedCallback){
-        var fact: Fact?
         val api = NumbersClient.getClient().create(NumbersApi::class.java)
 
-        val data = api.getMathFactAboutSpecificNumber(number = number)
-        data.enqueue(object : Callback<Fact>{
-
-            override fun onResponse(call: Call<Fact>, response: Response<Fact>) {
-                fact = response.body()
-                callback.notifyDataChanged(fact!!)
-                Log.d(TAG, "onResponse: ${fact!!}")
-            }
-
-            override fun onFailure(call: Call<Fact>, t: Throwable) {
+        disposableBag.add(api.getMathFactAboutSpecificNumber(number)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                callback.notifyDataChanged(it)
+            },{
                 callback.notifyDataChanged(
                     Fact(
-                        t.toString(),
+                        it.toString(),
                         false,
                         (-1.0).toFloat()
                     )
                 )
-                Log.d(TAG, "onFailure: $t")
-            }
-        })
+            })
+        )
     }
 
-    fun getDateFactAboutRandomDate(callback: DataChangedCallback){
-        var fact: Fact?
+    fun getDateFactAboutRandomDate(callback: DataChangedCallback){var fact: Fact?
         val api = NumbersClient.getClient().create(NumbersApi::class.java)
 
-        val data = api.getDateFactAboutRandomDate()
-        data.enqueue(object : Callback<Fact>{
-
-            override fun onResponse(call: Call<Fact>, response: Response<Fact>) {
-                fact = response.body()
-
-                val date = parseDate(fact!!.number.toInt())
-
-                callback.notifyDataChanged(fact!!.text, date[1], date[0])
-                Log.d(TAG, "onResponse: ${fact!!}")
-            }
-
-            override fun onFailure(call: Call<Fact>, t: Throwable) {
+        disposableBag.add(api.getDateFactAboutRandomDate()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                callback.notifyDataChanged(it)
+            },{
                 callback.notifyDataChanged(
                     Fact(
-                        t.toString(),
+                        it.toString(),
                         false,
                         (-1.0).toFloat()
                     )
                 )
-                Log.d(TAG, "onFailure: $t")
-            }
-        })
+            })
+        )
     }
 
     fun getDateFactAboutSpecificDate(
@@ -152,35 +146,28 @@ class NumbersRepository {
         month: Int,
         day: Int
         ){
-        var fact: Fact?
         val api = NumbersClient.getClient().create(NumbersApi::class.java)
 
-        val data = api.getDateFactAboutSpecificDate(
-            month = month,
-            day = day
-        )
-        data.enqueue(object : Callback<Fact>{
-
-            override fun onResponse(call: Call<Fact>, response: Response<Fact>) {
-                fact = response.body()
-                callback.notifyDataChanged(fact!!.text, day, month)
-                Log.d(TAG, "onResponse: ${fact!!}")
-            }
-
-            override fun onFailure(call: Call<Fact>, t: Throwable) {
+        disposableBag.add(api.getDateFactAboutSpecificDate(month, day)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                callback.notifyDataChanged(it.text, day, month)
+            },{
                 callback.notifyDataChanged(
                     Fact(
-                        t.toString(),
+                        it.toString(),
                         false,
                         (-1.0).toFloat()
                     )
                 )
-                Log.d(TAG, "onFailure: $t")
-            }
-        })
+            })
+        )
+
     }
 
-    private fun parseDate(date: Int): Array<Int>{
+    //треш
+    /*private fun parseDate(date: Int): Array<Int>{
         var month = 1
         var day = date
 
@@ -254,5 +241,5 @@ class NumbersRepository {
 
         return arrayOf(month, day)
     }
-
+*/
 }

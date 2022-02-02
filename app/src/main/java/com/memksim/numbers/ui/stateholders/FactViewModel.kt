@@ -347,4 +347,9 @@ class FactViewModel: ViewModel(), DataChangedCallback {
         _liveData.value = newState
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        repository.clearBag()
+    }
+
 }
