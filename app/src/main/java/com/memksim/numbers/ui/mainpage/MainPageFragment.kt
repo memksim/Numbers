@@ -1,4 +1,4 @@
-package com.memksim.numbers.ui.views
+package com.memksim.numbers.ui.mainpage
 
 import android.os.Bundle
 import android.view.View

@@ -1,4 +1,4 @@
-package com.memksim.numbers.ui.views
+package com.memksim.numbers.ui.triviafactpage
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -11,32 +11,32 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.memksim.numbers.R
-import com.memksim.numbers.databinding.FragmentMathFactBinding
-import com.memksim.numbers.ui.stateholders.FactViewModel
+import com.memksim.numbers.databinding.FragmentTriviaFactBinding
+import com.memksim.numbers.viewmodel.FactViewModel
 
-class MathFactPageFragment: Fragment(R.layout.fragment_math_fact) {
+class TriviaFactPageFragment: Fragment(R.layout.fragment_trivia_fact) {
 
-    private var _binding: FragmentMathFactBinding? = null
-    private val binding: FragmentMathFactBinding
-        get() = _binding!!
-
-    private lateinit var navController: NavController
+    private var _binding: FragmentTriviaFactBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: FactViewModel
 
+    private lateinit var navController: NavController
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentMathFactBinding.bind(view)
+        _binding = FragmentTriviaFactBinding.bind(view)
 
         navController = findNavController()
 
         viewModel = ViewModelProvider(this)[FactViewModel::class.java]
         viewModel.getSpecificFact(
-            requestCode = 1,
+            requestCode = 0,
             number = viewModel.liveData.value!!.digit
         )
 
         viewModel.liveData.observe(viewLifecycleOwner, Observer {
+            //val text = it?.text ?: "error"
             binding.factText.text = it.fact
             binding.numberText.setText(it.digit.toString())
         })
@@ -67,7 +67,7 @@ class MathFactPageFragment: Fragment(R.layout.fragment_math_fact) {
                     if(binding.numberText.text.toString() != ""){
                         viewModel.updateDigit(binding.numberText.text.toString().toInt())
                         viewModel.getSpecificFact(
-                            requestCode = 1,
+                            requestCode = 0,
                             number = viewModel.liveData.value!!.digit
                         )
                         return true
@@ -78,27 +78,24 @@ class MathFactPageFragment: Fragment(R.layout.fragment_math_fact) {
             }
         })
 
-
-
     }
 
     private fun getRandomFact(){
-        viewModel.getRandomFact(1)
+        viewModel.getRandomFact(0)
     }
 
     private fun getSpecificFact(){
         viewModel.getSpecificFact(
-            requestCode = 1,
-            viewModel.liveData.value!!.digit)
+            requestCode = 0,
+            number = viewModel.liveData.value!!.digit)
     }
 
     private fun goBack(){
-        navController.navigate(R.id.action_mathFactPageFragment_to_mainPageFragment)
+        navController.navigate(R.id.action_triviaFactPageFragment_to_mainPageFragment)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

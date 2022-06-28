@@ -2,9 +2,7 @@ package com.memksim.numbers
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.memksim.numbers.ui.views.TriviaFactPageFragment
 import com.memksim.numbers.databinding.ActivityMainBinding
-import com.memksim.numbers.ui.views.MainPageFragment
 
 /**http://numbersapi.com*/
 

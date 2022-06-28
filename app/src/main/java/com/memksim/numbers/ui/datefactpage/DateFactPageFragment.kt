@@ -1,4 +1,4 @@
-package com.memksim.numbers.ui.views
+package com.memksim.numbers.ui.datefactpage
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -12,8 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.memksim.numbers.R
 import com.memksim.numbers.databinding.FragmentDateFactBinding
-import com.memksim.numbers.model.Fact
-import com.memksim.numbers.ui.stateholders.FactViewModel
+import com.memksim.numbers.viewmodel.FactViewModel
 
 class DateFactPageFragment: Fragment(R.layout.fragment_date_fact) {
 

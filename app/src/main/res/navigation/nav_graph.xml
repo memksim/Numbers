@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/mainPageFragment"
-        android:name="com.memksim.numbers.ui.views.MainPageFragment"
+        android:name="com.memksim.numbers.ui.mainpage.MainPageFragment"
         android:label="MainPageFragment"
         tools:layout="@layout/fragment_main_page">
         <action
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/triviaFactPageFragment"
-        android:name="com.memksim.numbers.ui.views.TriviaFactPageFragment"
+        android:name="com.memksim.numbers.ui.triviafactpage.TriviaFactPageFragment"
         android:label="TriviaFactPageFragment"
         tools:layout="@layout/fragment_trivia_fact">
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/dateFactPageFragment"
-        android:name="com.memksim.numbers.ui.views.DateFactPageFragment"
+        android:name="com.memksim.numbers.ui.datefactpage.DateFactPageFragment"
         android:label="DateFactPageFragment"
         tools:layout="@layout/fragment_date_fact">
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/mathFactPageFragment"
-        android:name="com.memksim.numbers.ui.views.MathFactPageFragment"
+        android:name="com.memksim.numbers.ui.mathfactpage.MathFactPageFragment"
         android:label="MathFactPageFragment"
         tools:layout="@layout/fragment_math_fact">
         <action

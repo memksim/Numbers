@@ -1,12 +1,24 @@
-package com.memksim.numbers.ui.stateholders
+package com.memksim.numbers.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.memksim.numbers.model.Fact
 import com.memksim.numbers.model.repositories.NumbersRepository
-import com.memksim.numbers.ui.state.FactPageState
+import com.memksim.numbers.viewmodel.FactPageState
 import kotlin.random.Random
+
+interface DataChangedCallback {
+
+    fun notifyDataChanged(data: Fact)
+
+    fun notifyDataChanged(
+        fact: String,
+        day: Int,
+        month: Int
+    )
+
+}
 
 class FactViewModel: ViewModel(), DataChangedCallback {
 

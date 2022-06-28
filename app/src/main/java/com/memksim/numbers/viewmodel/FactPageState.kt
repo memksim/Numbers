@@ -1,4 +1,4 @@
-package com.memksim.numbers.ui.state
+package com.memksim.numbers.viewmodel
 
 data class FactPageState(
     val month: Int = 1,
