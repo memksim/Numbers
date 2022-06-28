@@ -8,6 +8,9 @@ import com.memksim.numbers.ui.views.MainPageFragment
 
 /**http://numbersapi.com*/
 
+
+//некоторые изменения
+
 const val TAG = "test"
 class MainActivity : AppCompatActivity() {
 
